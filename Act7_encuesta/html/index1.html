@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Act.7</title>
+</head>
+<body>
+    <header>
+        <h2>
+			<a class="opcionMenuPrincipal" href="../html/index1.html"> Artistas pop</a>
+		</h2>
+        <h1>Contesta las siguientes preguntas sobre tus artistas favoritos aqui y ahora</h1>
+    </header>
+
+    <section id="seccion2">
+        <br>
+        <h3>Fatima Monserrat Velazquez zarate EVN 403</h3>
+        <br>
+    </section>
+
+    <section id="seccion">
+        
+        <article>
+            <p>
+                <h2>¿Te gusta la musica?</h2>
+                <input type="radio" name="op" @change="muestraPregunta(1)"/>Si
+                <input type="radio" name="op" @change="muestraPregunta(0)"/>No
+            </p>
+            <!--Por si el usuario dice que si-->
+            <div v-if="mostrar">
+                <p>¿Cuántos años tienes escuchando musica?</p>
+                <input type="number" v-model.number="numan">
+
+                <span v-if="numan<0">
+                    <p>Por favor ingresar un año correcto :)</p>
+                </span>
+                    <p v-else-if="numan==0 || numan<2">¿Qué tipo de musica te motiva?</p>
+                    <p v-else-if="numan >= 2">¿Qué tipo de musica te motiva?</p>
+                
+                <textarea name="" id="" cols="50" rows="3" v-model="exper" placeholder="Escribe aquí"></textarea>
+                
+                <p>¿Cuales son tus generos favoritos? (Captura uno a uno)</p>
+                    <input type="text" v-model="leng" >
+                    <button @click="agregar()" :disabled="leng.length == 0">Capturar</button>    
+                <div id="array">    
+                <ul>
+                    <li v-for="(valor) in lenguajes">{{ valor }}</li>
+                </ul>
+                </div>
+                       
+                
+            </div>
+            <!--Por si el usuario dice que no-->
+            <span v-else id="no">{{ mensaje }}</span>
+            <!--dibuja la caja de respuestas cuando el usuario responda-->
+            <br>
+            <button v-if="mostrar" @click="muestraResultados">Enviar</button>
+        </article>
+        <!--Dibujar caja donde se vacien los resultados-->
+        <article v-if="resultados" id="res">
+            <h2>Gracias por participar en nuestra encuesta</h2>
+            <p>¿Te gusta la musica? : Si</p>
+            <p>¿Cuántos años tienes escuchando musica? : {{ numan }}</p>
+            <p>¿Qué tipo de musica te motiva?</p>
+            <textarea id="exp" cols="30" rows="2">{{ exper }}</textarea>
+            <p>¿Cuales son tus generos favoritos?</p>
+            <div id="array1">    
+                <ul>
+                    <li v-for="(valor) in lenguajes">{{ valor }}</li>
+                </ul>
+                </div>
+        </article>
+    </section>
+
+
+    <script src="../js/vue.js"></script>
+    <script src="../js/modelo.js"></script>
+
+    <footer>
+        <h1>
+            <a id="foot">GRACIAS POR VISITARNOS</a>
+        </h1>
+    </footer>
+</body>
+</html>
